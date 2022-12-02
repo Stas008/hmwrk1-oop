@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 public abstract class Base{
     private int attack;
@@ -5,12 +6,15 @@ public abstract class Base{
     private int shoot;
     private int[] damage;
     private double health;
+    private double maxHealth;
     private int speed;
     private boolean delivery;
     private boolean magic;
     private String name;
     private static int idCounter;
     private int playerID;
+
+    protected ArrayList<Base> team;
 
     public Base (int attack, int protection, int shoot, int[] damage, double health, int speed, boolean delivery, boolean magic, String name){
         this.attack=attack;
@@ -23,6 +27,7 @@ public abstract class Base{
         this.magic=magic;
         this.name=name;
         playerID=idCounter++;
+        this.maxHealth=maxHealth;
 
     }
     public int getPlayerId(){
@@ -46,6 +51,9 @@ public abstract class Base{
     }
     public double getHealth(){
         return health;
+    }
+    public double getMaxHealth(){
+        return maxHealth;
     }
     public int getSpeed(){
         return speed;
@@ -89,6 +97,12 @@ public abstract class Base{
         }
     }
 
+    public void setMaxHealth (double maxHealth){
+        if (maxHealth>=0){
+            this.maxHealth=maxHealth;
+        }
+    }
+
     public void setSpeed(int speed){
         if (speed>=0){
             this.speed=speed;
@@ -108,7 +122,7 @@ public abstract class Base{
 
      @Override
      public String toString() {
-        return "attack=" + attack +
+        return getClass().getSimpleName()+" : "+playerID+" attack=" + attack +
                 ", protection=" + protection +
                 ", shoot=" + shoot +
                 ", damage=" + Arrays.toString(damage) +
@@ -116,6 +130,9 @@ public abstract class Base{
                 ", speed=" + speed +
                 ", delivery=" + delivery +
                 ", magic=" + magic;
+    }
+    public String getInfo() {
+        return null;
     }
 
 
